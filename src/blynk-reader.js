@@ -1,13 +1,12 @@
 module.exports = function(RED) {
   function BlynkReader(config) {
     RED.nodes.createNode(this, config);
-
     this.server = RED.nodes.getNode(config.server);
+    this.pin = null;
 
     if(this.server) {
-      // Do something with:
-      //  this.server.host
-      //  this.server.post
+      this.pin = new this.server.blynk.VirtualPin(config.pin);
+      this.pin.on('write', x => console.log('Received: ' + x));
     } else {
       // No config node configured
     }
