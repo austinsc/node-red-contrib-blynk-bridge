@@ -14,7 +14,7 @@ module.exports = function(RED) {
       this.server.on('connected', () => this.status({
         fill: 'green',
         shape: 'dot',
-        text: 'connected to pin V' + config.bridgePin
+        text: 'connected to pin V' + config.pin
       }));
       this.server.on('disconnected', () => this.status({
         fill: 'red',
