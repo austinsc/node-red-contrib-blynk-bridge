@@ -10,6 +10,21 @@ module.exports = function(RED) {
     if(this.server) {
       this.bridge = new this.server.blynk.WidgetBridge(this.bridgePin);
       this.server.on('connected', () => this.bridge.setAuthToken(this.token));
+
+      this.server.blynk.on('connected', function(n) {
+        this.status({
+          fill: 'green',
+          shape: 'dot',
+          text: 'connected to pin V' + node.pin
+        });
+      });
+      this.server.blynk.on('closed', function() {
+        this.status({
+          fill: 'red',
+          shape: 'ring',
+          text: 'disconnected'
+        });
+      });
     } else {
       // No config node configured
     }
