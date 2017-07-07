@@ -8,20 +8,16 @@ module.exports = function(RED) {
       this.pin = new this.server.blynk.VirtualPin(config.pin);
       this.pin.on('write', x => this.send({payload: x, pin: config.pin}));
 
-      this.server.blynk.on('connected', function(n) {
-        this.status({
-          fill: 'green',
-          shape: 'dot',
-          text: 'connected to pin V' + node.pin
-        });
-      });
-      this.server.blynk.on('closed', function() {
-        this.status({
-          fill: 'red',
-          shape: 'ring',
-          text: 'disconnected'
-        });
-      });
+      this.server.on('connected', () => this.status({
+        fill: 'green',
+        shape: 'dot',
+        text: 'connected to pin V' + config.pin
+      }));
+      this.server.on('disconnected', () => this.status({
+        fill: 'red',
+        shape: 'ring',
+        text: 'disconnected'
+      }));
 
     } else {
       // No config node configured
