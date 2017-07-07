@@ -30,7 +30,8 @@
     "nodes": {
       "blynk-controller": "src/blynk-controller.js",
       "blynk-reader": "src/blynk-reader.js",
-      "blynk-writer": "src/blynk-writer.js"
+      "blynk-writer": "src/blynk-writer.js",
+      "blynk-bridge": "src/blynk-bridge.js"
     }
   }
 }
