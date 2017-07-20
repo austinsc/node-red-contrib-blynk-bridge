@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-blynk-bridge",
-  "version": "0.0.0",
+  "version": "1.0.69",
   "description": "Blynk integration with node-red with bridging capabilities",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
       "blynk-controller": "src/blynk-controller.js",
       "blynk-reader": "src/blynk-reader.js",
       "blynk-writer": "src/blynk-writer.js",
+      "blynk-sync": "src/blynk-sync.js",
       "blynk-bridge": "src/blynk-bridge.js"
     }
   }

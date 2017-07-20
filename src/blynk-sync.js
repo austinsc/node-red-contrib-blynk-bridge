@@ -1,18 +1,15 @@
 module.exports = function(RED) {
-  function BlynkWriter(config) {
+  function BlynkSync(config) {
     RED.nodes.createNode(this, config);
     this.server = RED.nodes.getNode(config.server);
     this.pin = null;
     this.last = null;
 
     if(this.server) {
-      this.pin = new this.server.blynk.VirtualPin(config.pin);
-      this.pin.on('read', () => this.pin.write(this.last));
-
       this.server.on('connected', () => this.status({
         fill: 'green',
         shape: 'dot',
-        text: 'connected to pin V' + config.pin
+        text: 'connected'
       }));
       this.server.on('disconnected', () => this.status({
         fill: 'red',
@@ -20,15 +17,17 @@ module.exports = function(RED) {
         text: 'disconnected'
       }));
     } else {
-      // No config node configured
+
     }
     this.on('input', (msg) => {
       if(msg.hasOwnProperty('payload')) {
-        this.last = msg.payload;
-        this.pin.write(msg.payload);
+        var pin = parseInt(msg.payload);
+        this.server.blynk.syncVirtual(pin);
+      } else {
+        this.server.blynk.syncAll();
       }
     });
   }
 
-  RED.nodes.registerType('blynk-writer', BlynkWriter);
+  RED.nodes.registerType('blynk-sync', BlynkSync);
 };

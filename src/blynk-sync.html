@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('blynk-sync', {
+    category: 'blynk',
+    defaults: {
+      name: {value: ''},
+      server: {value: '', type: 'blynk-controller'},
+    },
+    inputs: 1,
+    outputs: 0,
+    color: '#1fd699',
+    icon: 'inject.png',
+    label: function() {
+      return this.name || 'blynk-sync';
+    }
+  });
+</script>
+<script type="text/x-red" data-template-name="blynk-sync">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
+    <input type="text" id="node-input-name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-server"><i class="icon-bookmark"></i> Server</label>
+    <input type="text" id="node-input-server">
+  </div>
+</script>
